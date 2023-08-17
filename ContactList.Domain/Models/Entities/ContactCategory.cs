@@ -1,9 +1,11 @@
-﻿namespace ContactList.Domain.Models.Enums
+﻿namespace ContactList.Domain.Models.Entities
 {
-    public enum ContactCategory
+    public class ContactCategory
     {
-        służbowy,
-        prywatny,
-        inny
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+
+        public ICollection<Contact>? Contacts { get; set; }
+        public ICollection<ContactSubcategory>? Subcategories { get; set; }
     }
 }

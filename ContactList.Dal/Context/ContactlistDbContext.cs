@@ -1,4 +1,5 @@
 ﻿using ContactList.Domain.Models.Entities;
+using ContactList.Domain.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactList.Dal.Context

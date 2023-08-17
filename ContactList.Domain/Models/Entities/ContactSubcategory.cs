@@ -1,4 +1,6 @@
-﻿namespace ContactList.Domain.Models.Entities
+﻿using ContactList.Domain.Models.Enums;
+
+namespace ContactList.Domain.Models.Entities
 {
     public class ContactSubcategory
     {
