@@ -34,9 +34,6 @@ namespace ContactList.Dal.Migrations
                     b.Property<Guid>("ContactCategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ContactSubcategoryId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -53,14 +50,15 @@ namespace ContactList.Dal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Subcategory")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ContactCategoryId");
-
-                    b.HasIndex("ContactSubcategoryId");
 
                     b.HasIndex("UserId");
 
@@ -69,27 +67,27 @@ namespace ContactList.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("fda3d2ef-1742-4c43-a45e-033b2e2a4404"),
+                            Id = new Guid("fe3117ee-9f22-4bd3-9480-ab25c583aa42"),
                             BirthDate = new DateTime(1995, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ContactCategoryId = new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"),
-                            ContactSubcategoryId = new Guid("9008e373-b36c-4629-9c78-ec6603cf58e2"),
+                            ContactCategoryId = new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"),
                             Email = "jan.kowalski@contactlistapp.com",
                             FirstName = "Jan",
                             LastName = "Kowalski",
                             PhoneNumber = "123456789",
-                            UserId = new Guid("7d50c0d4-e000-414c-a598-21fdf64da5d0")
+                            Subcategory = "szef",
+                            UserId = new Guid("76dd46da-a95c-4c00-a151-960c6e1854cc")
                         },
                         new
                         {
-                            Id = new Guid("6d7175bb-1f73-4dc3-9f88-e6ba4af9cca3"),
+                            Id = new Guid("c7041a8b-6dfa-4b52-8afe-da1549a96b0d"),
                             BirthDate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ContactCategoryId = new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"),
-                            ContactSubcategoryId = new Guid("d04e58e5-9371-440c-aa57-63001e72f390"),
+                            ContactCategoryId = new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"),
                             Email = "adam.nowak@contactlistapp.com",
                             FirstName = "Adam",
                             LastName = "Nowak",
                             PhoneNumber = "987654321",
-                            UserId = new Guid("7d50c0d4-e000-414c-a598-21fdf64da5d0")
+                            Subcategory = "klient",
+                            UserId = new Guid("76dd46da-a95c-4c00-a151-960c6e1854cc")
                         });
                 });
 
@@ -110,17 +108,17 @@ namespace ContactList.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"),
+                            Id = new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"),
                             Name = "służbowy"
                         },
                         new
                         {
-                            Id = new Guid("bf40ad89-e377-4f85-b741-d972ba9bac1d"),
+                            Id = new Guid("726bbd2b-a32c-43a3-bfbd-15a94eb21de3"),
                             Name = "prywatny"
                         },
                         new
                         {
-                            Id = new Guid("354a9056-11d8-4af0-a53f-ca926ddb50c4"),
+                            Id = new Guid("d7694440-7cb0-4b47-b653-77edb26f26b7"),
                             Name = "inny"
                         });
                 });
@@ -129,9 +127,6 @@ namespace ContactList.Dal.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ContactCategoryId")
@@ -143,23 +138,21 @@ namespace ContactList.Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("ContactCategoryId");
 
                     b.ToTable("Subcategories");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9008e373-b36c-4629-9c78-ec6603cf58e2"),
-                            CategoryId = new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"),
-                            ContactCategoryId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Id = new Guid("1cdba565-646f-40d3-a66b-7502de2f2d09"),
+                            ContactCategoryId = new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"),
                             Name = "szef"
                         },
                         new
                         {
-                            Id = new Guid("d04e58e5-9371-440c-aa57-63001e72f390"),
-                            CategoryId = new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"),
-                            ContactCategoryId = new Guid("00000000-0000-0000-0000-000000000000"),
+                            Id = new Guid("d779bf0d-4579-4ed2-960b-6b17d215c3f8"),
+                            ContactCategoryId = new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"),
                             Name = "klient"
                         });
                 });
@@ -185,7 +178,7 @@ namespace ContactList.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("7d50c0d4-e000-414c-a598-21fdf64da5d0"),
+                            UserId = new Guid("76dd46da-a95c-4c00-a151-960c6e1854cc"),
                             Email = "user1@contactlistapp.com",
                             Password = "!@#Password123"
                         });
@@ -199,10 +192,6 @@ namespace ContactList.Dal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ContactList.Domain.Models.Entities.ContactSubcategory", "Subcategory")
-                        .WithMany()
-                        .HasForeignKey("ContactSubcategoryId");
-
                     b.HasOne("ContactList.Domain.Models.Entities.User", "User")
                         .WithMany("Contacts")
                         .HasForeignKey("UserId")
@@ -211,20 +200,18 @@ namespace ContactList.Dal.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("Subcategory");
-
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("ContactList.Domain.Models.Entities.ContactSubcategory", b =>
                 {
-                    b.HasOne("ContactList.Domain.Models.Entities.ContactCategory", "Category")
+                    b.HasOne("ContactList.Domain.Models.Entities.ContactCategory", "ContactCategory")
                         .WithMany("Subcategories")
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("ContactCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.Navigation("ContactCategory");
                 });
 
             modelBuilder.Entity("ContactList.Domain.Models.Entities.ContactCategory", b =>

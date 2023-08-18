@@ -1,5 +1,4 @@
 ﻿using ContactList.Domain.Models.Entities;
-using ContactList.Domain.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactList.Dal.Context
@@ -15,6 +14,18 @@ namespace ContactList.Dal.Context
 
         protected override async void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ContactCategory>()
+              .HasMany(c => c.Subcategories)
+              .WithOne(s => s.ContactCategory)
+              .HasForeignKey(s => s.ContactCategoryId);
+
+            // Konfiguracja relacji między kontaktem a kategorią
+            modelBuilder.Entity<Contact>()
+                .HasOne(c => c.Category)
+                .WithMany(cat => cat.Contacts)
+                .HasForeignKey(c => c.ContactCategoryId);
+
+
             //data
             var user1 = new User
             {
@@ -44,14 +55,14 @@ namespace ContactList.Dal.Context
             var subcategory1 = new ContactSubcategory
             {
                 Id = Guid.NewGuid(),
-                CategoryId = category1.Id,
+                ContactCategoryId = category1.Id,
                 Name = "szef"
             };
 
             var subcategory2 = new ContactSubcategory
             {
                 Id = Guid.NewGuid(),
-                CategoryId = category1.Id,
+                ContactCategoryId = category1.Id,
                 Name = "klient"
             };
 
@@ -65,7 +76,7 @@ namespace ContactList.Dal.Context
                 BirthDate = new DateTime(1995, 1, 1),
                 UserId = user1.UserId,
                 ContactCategoryId = category1.Id,
-                ContactSubcategoryId = subcategory1.Id,
+                Subcategory = subcategory1.Name,
             };
 
             var contact2 = new Contact
@@ -78,7 +89,7 @@ namespace ContactList.Dal.Context
                 BirthDate = new DateTime(1990, 1, 1),
                 UserId = user1.UserId,
                 ContactCategoryId = category1.Id,
-                ContactSubcategoryId = subcategory2.Id,
+                Subcategory = subcategory2.Name,
             };
 
             // Add data to Db

@@ -43,7 +43,6 @@ namespace ContactList.Dal.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ContactCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -51,8 +50,8 @@ namespace ContactList.Dal.Migrations
                 {
                     table.PrimaryKey("PK_Subcategories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Subcategories_Categroies_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_Subcategories_Categroies_ContactCategoryId",
+                        column: x => x.ContactCategoryId,
                         principalTable: "Categroies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -70,7 +69,7 @@ namespace ContactList.Dal.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ContactCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ContactSubcategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Subcategory = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -81,11 +80,6 @@ namespace ContactList.Dal.Migrations
                         principalTable: "Categroies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Contacts_Subcategories_ContactSubcategoryId",
-                        column: x => x.ContactSubcategoryId,
-                        principalTable: "Subcategories",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Contacts_Users_UserId",
                         column: x => x.UserId,
@@ -99,32 +93,32 @@ namespace ContactList.Dal.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"), "służbowy" },
-                    { new Guid("354a9056-11d8-4af0-a53f-ca926ddb50c4"), "inny" },
-                    { new Guid("bf40ad89-e377-4f85-b741-d972ba9bac1d"), "prywatny" }
+                    { new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"), "służbowy" },
+                    { new Guid("726bbd2b-a32c-43a3-bfbd-15a94eb21de3"), "prywatny" },
+                    { new Guid("d7694440-7cb0-4b47-b653-77edb26f26b7"), "inny" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserId", "Email", "Password" },
-                values: new object[] { new Guid("7d50c0d4-e000-414c-a598-21fdf64da5d0"), "user1@contactlistapp.com", "!@#Password123" });
-
-            migrationBuilder.InsertData(
-                table: "Subcategories",
-                columns: new[] { "Id", "CategoryId", "ContactCategoryId", "Name" },
-                values: new object[,]
-                {
-                    { new Guid("9008e373-b36c-4629-9c78-ec6603cf58e2"), new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"), new Guid("00000000-0000-0000-0000-000000000000"), "szef" },
-                    { new Guid("d04e58e5-9371-440c-aa57-63001e72f390"), new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"), new Guid("00000000-0000-0000-0000-000000000000"), "klient" }
-                });
+                values: new object[] { new Guid("76dd46da-a95c-4c00-a151-960c6e1854cc"), "user1@contactlistapp.com", "!@#Password123" });
 
             migrationBuilder.InsertData(
                 table: "Contacts",
-                columns: new[] { "Id", "BirthDate", "ContactCategoryId", "ContactSubcategoryId", "Email", "FirstName", "LastName", "PhoneNumber", "UserId" },
+                columns: new[] { "Id", "BirthDate", "ContactCategoryId", "Email", "FirstName", "LastName", "PhoneNumber", "Subcategory", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("6d7175bb-1f73-4dc3-9f88-e6ba4af9cca3"), new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"), new Guid("d04e58e5-9371-440c-aa57-63001e72f390"), "adam.nowak@contactlistapp.com", "Adam", "Nowak", "987654321", new Guid("7d50c0d4-e000-414c-a598-21fdf64da5d0") },
-                    { new Guid("fda3d2ef-1742-4c43-a45e-033b2e2a4404"), new DateTime(1995, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("261ccb76-11de-4f45-a03a-bc66caa1853c"), new Guid("9008e373-b36c-4629-9c78-ec6603cf58e2"), "jan.kowalski@contactlistapp.com", "Jan", "Kowalski", "123456789", new Guid("7d50c0d4-e000-414c-a598-21fdf64da5d0") }
+                    { new Guid("c7041a8b-6dfa-4b52-8afe-da1549a96b0d"), new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"), "adam.nowak@contactlistapp.com", "Adam", "Nowak", "987654321", "klient", new Guid("76dd46da-a95c-4c00-a151-960c6e1854cc") },
+                    { new Guid("fe3117ee-9f22-4bd3-9480-ab25c583aa42"), new DateTime(1995, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"), "jan.kowalski@contactlistapp.com", "Jan", "Kowalski", "123456789", "szef", new Guid("76dd46da-a95c-4c00-a151-960c6e1854cc") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Subcategories",
+                columns: new[] { "Id", "ContactCategoryId", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("1cdba565-646f-40d3-a66b-7502de2f2d09"), new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"), "szef" },
+                    { new Guid("d779bf0d-4579-4ed2-960b-6b17d215c3f8"), new Guid("70a8f576-616e-44db-a4dc-b13134a8580b"), "klient" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -133,19 +127,14 @@ namespace ContactList.Dal.Migrations
                 column: "ContactCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contacts_ContactSubcategoryId",
-                table: "Contacts",
-                column: "ContactSubcategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Contacts_UserId",
                 table: "Contacts",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subcategories_CategoryId",
+                name: "IX_Subcategories_ContactCategoryId",
                 table: "Subcategories",
-                column: "CategoryId");
+                column: "ContactCategoryId");
         }
 
         /// <inheritdoc />

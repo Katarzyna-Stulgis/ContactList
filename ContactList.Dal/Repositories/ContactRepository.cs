@@ -36,14 +36,16 @@ namespace ContactList.Dal.Repositories
             return contact;
         }
 
-        public async Task<IEnumerable<Contact>> GetAllContactsAsync(Guid userId)
+        public async Task<IEnumerable<Contact>> GetAllContactsAsync()
         {
             return await _dbContext.Set<Contact>().ToListAsync();
         }
 
         public async Task<Contact> GetContactByIdAsync(Guid id)
         {
-            var contact = await _dbContext.Set<Contact>().FindAsync(id);
+            var contact = await _dbContext.Set<Contact>().
+                Where(c=> c.Id == id)
+                .Include(cat=>cat.Category).FirstOrDefaultAsync();
 
             if (contact == null)
             {

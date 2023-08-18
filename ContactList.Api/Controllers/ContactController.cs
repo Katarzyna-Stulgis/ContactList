@@ -17,9 +17,9 @@ namespace ContactList.Api.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<List<Contact>>> GetAll(Guid userId)
+        public async Task<ActionResult<List<Contact>>> GetAll()
         {
-            var task = await _contactService.GetAllContactsAsync(userId);
+            var task = await _contactService.GetAllContactsAsync();
             return Ok(task);
         }
 

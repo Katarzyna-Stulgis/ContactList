@@ -1,6 +1,4 @@
-﻿using ContactList.Domain.Models.Enums;
-
-namespace ContactList.Domain.Models.Entities
+﻿namespace ContactList.Domain.Models.Entities
 {
     public class Contact
     {
@@ -17,7 +15,6 @@ namespace ContactList.Domain.Models.Entities
         public Guid ContactCategoryId { get; set; }
         public ContactCategory? Category { get; set; }
 
-        public Guid? ContactSubcategoryId { get; set; }
-        public ContactSubcategory? Subcategory { get; set; }
+        public string? Subcategory { get; set; }
     }
 }

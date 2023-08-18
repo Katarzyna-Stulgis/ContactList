@@ -21,9 +21,9 @@ namespace ContactList.Service.DataServices
             return await _repository.DeleteContactAsync(id);
         }
 
-        public async Task<IEnumerable<Contact>> GetAllContactsAsync(Guid userId)
+        public async Task<IEnumerable<Contact>> GetAllContactsAsync()
         {
-            return await _repository.GetAllContactsAsync(userId);
+            return await _repository.GetAllContactsAsync();
         }
 
         public async Task<Contact> GetContactByIdAsync(Guid id)
