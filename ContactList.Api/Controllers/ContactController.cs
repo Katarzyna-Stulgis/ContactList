@@ -1,5 +1,7 @@
-﻿using ContactList.Domain.Interfaces;
+﻿using AutoMapper;
+using ContactList.Domain.Interfaces;
 using ContactList.Domain.Models.Entities;
+using ContactList.Service.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactList.Api.Controllers
@@ -9,10 +11,12 @@ namespace ContactList.Api.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IContactService _contactService;
+        private readonly IMapper _mapper;
 
-        public ContactController(IContactService contactService)
+        public ContactController(IContactService contactService, IMapper mapper)
         {
             _contactService = contactService;
+            _mapper = mapper;
         }
 
 
@@ -31,7 +35,8 @@ namespace ContactList.Api.Controllers
             {
                 return NotFound("Flashcard not found");
             }
-            return Ok(task);
+            var dto =_mapper.Map<ContactDto>(task);
+            return Ok(dto);
         }
 
         [HttpPost]

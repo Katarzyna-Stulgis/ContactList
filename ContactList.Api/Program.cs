@@ -4,6 +4,7 @@ using ContactList.Domain.Interfaces;
 using ContactList.Domain.Models;
 using ContactList.Domain.Models.Entities;
 using ContactList.Service.DataServices;
+using ContactList.Service.Profiles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -27,6 +28,10 @@ builder.Services.AddCors(options => options.AddPolicy(name: "ContactlistOrigins"
         policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
     }));
 
+builder.Services.AddAutoMapper(
+    typeof(Program),
+    typeof(ContactProfile)
+    );
 
 // DbContext
 builder.Services.AddTransient<DbContext, ContactlistDbContext>();

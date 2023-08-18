@@ -44,8 +44,9 @@ namespace ContactList.Dal.Repositories
         public async Task<Contact> GetContactByIdAsync(Guid id)
         {
             var contact = await _dbContext.Set<Contact>().
-                Where(c=> c.Id == id)
-                .Include(cat=>cat.Category).FirstOrDefaultAsync();
+                Where(c => c.Id == id)
+                .Include(c => c.Category)
+                .FirstOrDefaultAsync();
 
             if (contact == null)
             {
