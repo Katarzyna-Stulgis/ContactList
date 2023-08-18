@@ -19,7 +19,6 @@ namespace ContactList.Api.Controllers
             _mapper = mapper;
         }
 
-
         [HttpGet]
         public async Task<ActionResult<List<Contact>>> GetAll()
         {

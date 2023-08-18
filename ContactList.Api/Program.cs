@@ -59,10 +59,12 @@ builder.Services.AddAuthentication(option =>
 // Services Injection
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IContactCategoryService, ContactCategoryService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 // Repositories Injection
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Services.AddScoped<IContactCategoryRepository, ContactCategoryRepository>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 
 var app = builder.Build();
