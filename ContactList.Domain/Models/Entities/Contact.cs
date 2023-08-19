@@ -9,9 +9,6 @@
         public string PhoneNumber { get; set; }
         public DateTime BirthDate { get; set; }
 
-        public Guid UserId { get; set; }
-        public User? User { get; set; }
-
         public Guid ContactCategoryId { get; set; }
         public ContactCategory? Category { get; set; }
 

@@ -39,12 +39,12 @@ namespace ContactList.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Contact>> Add([FromBody] Contact flashcard)
+        public async Task<ActionResult<Contact>> Add([FromBody] Contact contact)
         {
             Contact task;
             try
             {
-                task = await _contactService.AddContactAsync(flashcard);
+                task = await _contactService.AddContactAsync(contact);
             }
             catch (Exception e)
             {
@@ -54,9 +54,9 @@ namespace ContactList.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update([FromRoute] Guid id, [FromBody] Contact flashcard)
+        public async Task<ActionResult> Update([FromRoute] Guid id, [FromBody] Contact contact)
         {
-            var task = await _contactService.UpdateContactAsync(flashcard);
+            var task = await _contactService.UpdateContactAsync(contact);
             return Ok(task.Id);
         }
 

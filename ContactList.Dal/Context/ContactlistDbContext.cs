@@ -74,7 +74,6 @@ namespace ContactList.Dal.Context
                 Email = "jan.kowalski@contactlistapp.com",
                 PhoneNumber = "123456789",
                 BirthDate = new DateTime(1995, 1, 1),
-                UserId = user1.UserId,
                 ContactCategoryId = category1.Id,
                 Subcategory = subcategory1.Name,
             };
@@ -87,7 +86,6 @@ namespace ContactList.Dal.Context
                 Email = "adam.nowak@contactlistapp.com",
                 PhoneNumber = "987654321",
                 BirthDate = new DateTime(1990, 1, 1),
-                UserId = user1.UserId,
                 ContactCategoryId = category1.Id,
                 Subcategory = subcategory2.Name,
             };

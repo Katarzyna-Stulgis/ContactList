@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ContactList.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/ContactCategories")]
     [ApiController]
     public class ContactCategoryController : ControllerBase
     {

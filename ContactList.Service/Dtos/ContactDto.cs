@@ -9,8 +9,8 @@
         public string PhoneNumber { get; set; }
         public DateTime BirthDate { get; set; }
 
+        public Guid ContactCategoryId { get; set; }
         public ContactCategoryDto? Category { get; set; }
-
         public string? Subcategory { get; set; }
     }
 }
