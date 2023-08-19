@@ -63,7 +63,7 @@ namespace ContactList.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] Guid id)
         {
-            var task = await _contactService.DeleteContactAsync(id);
+            await _contactService.DeleteContactAsync(id);
 
             return Ok(id);
         }

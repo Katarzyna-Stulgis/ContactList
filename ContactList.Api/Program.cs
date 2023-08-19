@@ -1,10 +1,13 @@
+using ContactList.Api.Validators;
 using ContactList.Dal.Context;
 using ContactList.Dal.Repositories;
 using ContactList.Domain.Interfaces;
 using ContactList.Domain.Models;
 using ContactList.Domain.Models.Entities;
 using ContactList.Service.DataServices;
+using ContactList.Service.Dtos;
 using ContactList.Service.Profiles;
+using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -30,7 +33,8 @@ builder.Services.AddCors(options => options.AddPolicy(name: "ContactlistOrigins"
 
 builder.Services.AddAutoMapper(
     typeof(Program),
-    typeof(ContactProfile)
+    typeof(ContactProfile),
+    typeof(UserProfile)
     );
 
 // DbContext
@@ -55,6 +59,10 @@ builder.Services.AddAuthentication(option =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
     };
 });
+
+// Add fluentValidation
+builder.Services.AddScoped<IValidator<RegisterUserDto>, RegisterUserDtoValidator>();
+builder.Services.AddScoped<IValidator<LoginDto>, LoginDtoValidator>();
 
 // Services Injection
 builder.Services.AddScoped<IContactService, ContactService>();

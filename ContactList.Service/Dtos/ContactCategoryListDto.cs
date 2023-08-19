@@ -5,6 +5,6 @@
         public Guid Id { get; set; }
         public string Name { get; set; }
 
-        public List<ContactSubcategoryDto>? contactSubcategories { get; set; }
+        public List<ContactSubcategoryDto>? ContactSubcategories { get; set; }
     }
 }

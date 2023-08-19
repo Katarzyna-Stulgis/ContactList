@@ -9,7 +9,7 @@ namespace ContactList.Dal.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<ContactCategory> Categroies { get; set; }
+        public DbSet<ContactCategory> Categories { get; set; }
         public DbSet<ContactSubcategory> Subcategories { get; set; }
 
         protected override async void OnModelCreating(ModelBuilder modelBuilder)
