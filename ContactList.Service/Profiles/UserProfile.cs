@@ -8,6 +8,7 @@ namespace ContactList.Service.Profiles
     {
         public UserProfile()
         {
+            // mapping dto
             CreateMap<LoginDto, User>().ReverseMap();
             CreateMap<RegisterUserDto, User>().ReverseMap();
         }

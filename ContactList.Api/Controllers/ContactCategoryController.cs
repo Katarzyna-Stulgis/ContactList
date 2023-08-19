@@ -22,7 +22,7 @@ namespace ContactList.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<ContactCategory>>> GetAll()
         {
-            var task = await _contactCategoryService.GetAllContactsAsync();
+            var task = await _contactCategoryService.GetAllCategoriesAsync();
             var dto = _mapper.Map<List<ContactCategoryListDto>>(task);
             return Ok(dto);
         }

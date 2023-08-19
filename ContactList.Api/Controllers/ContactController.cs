@@ -32,9 +32,9 @@ namespace ContactList.Api.Controllers
             var task = await _contactService.GetContactByIdAsync(guid);
             if (task == null)
             {
-                return NotFound("Flashcard not found");
+                return NotFound("Contact not found");
             }
-            var dto =_mapper.Map<ContactDto>(task);
+            var dto = _mapper.Map<ContactDto>(task);
             return Ok(dto);
         }
 

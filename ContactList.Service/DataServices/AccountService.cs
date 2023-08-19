@@ -37,6 +37,7 @@ namespace ContactList.Service.DataServices
                 throw new Exception("Invalid e-mail or password");
             }
 
+            // set of information that is contained inside a JWT token
             var claims = new List<Claim>()
             {
                 new Claim("UserId", user.UserId.ToString()),
@@ -47,6 +48,7 @@ namespace ContactList.Service.DataServices
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddDays(_authenticationSettings.JwtExpireDays);
 
+            //creating a jwt token
             var token = new JwtSecurityToken(_authenticationSettings.JwtIssuer,
                 _authenticationSettings.JwtIssuer,
                 claims,

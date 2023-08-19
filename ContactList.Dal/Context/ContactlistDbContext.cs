@@ -19,12 +19,10 @@ namespace ContactList.Dal.Context
               .WithOne(s => s.ContactCategory)
               .HasForeignKey(s => s.ContactCategoryId);
 
-            // Konfiguracja relacji między kontaktem a kategorią
             modelBuilder.Entity<Contact>()
                 .HasOne(c => c.Category)
                 .WithMany(cat => cat.Contacts)
                 .HasForeignKey(c => c.ContactCategoryId);
-
 
             //data
             var user1 = new User

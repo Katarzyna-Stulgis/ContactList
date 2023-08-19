@@ -8,6 +8,7 @@ namespace ContactList.Service.Profiles
     {
         public ContactProfile()
         {
+            // mapping dto
             CreateMap<ContactCategory, ContactCategoryDto>().ReverseMap();
             CreateMap<ContactCategory, ContactCategoryListDto>()
                 .ForMember(dest => dest.ContactSubcategories, opt => opt.MapFrom(src => src.Subcategories)).ReverseMap();

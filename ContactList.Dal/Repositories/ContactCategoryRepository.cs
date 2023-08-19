@@ -12,9 +12,8 @@ namespace ContactList.Dal.Repositories
         public ContactCategoryRepository(ContactlistDbContext dbcontext)
         {
             _dbContext = dbcontext;
-
         }
-        public async Task<IEnumerable<ContactCategory>> GetAllContactsAsync()
+        public async Task<IEnumerable<ContactCategory>> GetAllCategoriesAsync()
         {
             return await _dbContext.Set<ContactCategory>()
                 .Include(c => c.Subcategories)

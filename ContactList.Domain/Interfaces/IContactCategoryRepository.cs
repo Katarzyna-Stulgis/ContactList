@@ -4,6 +4,6 @@ namespace ContactList.Domain.Interfaces
 {
     public interface IContactCategoryRepository
     {
-        Task<IEnumerable<ContactCategory>> GetAllContactsAsync();
+        Task<IEnumerable<ContactCategory>> GetAllCategoriesAsync();
     }
 }

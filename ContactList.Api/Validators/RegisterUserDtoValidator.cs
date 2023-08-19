@@ -22,7 +22,7 @@ namespace ContactList.Api.Validators
 
             RuleFor(x => x.Password)
                 .NotEmpty()
-                .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,}")
+                .Matches(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^a-zA-Z0-9]).{8,}") // validation for more than 8 characters, uppercase and lowercase letters and special character
                 .MinimumLength(8);
 
             RuleFor(x => x.ConfirmPassword)

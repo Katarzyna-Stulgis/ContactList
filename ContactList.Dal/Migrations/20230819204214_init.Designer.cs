@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ContactList.Dal.Migrations
 {
     [DbContext(typeof(ContactlistDbContext))]
-    [Migration("20230818181202_migration2")]
-    partial class migration2
+    [Migration("20230819204214_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,9 +65,9 @@ namespace ContactList.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("47740644-e8a6-4ca2-8eb2-0c752eb39bc8"),
+                            Id = new Guid("7886d127-16d5-4461-8f41-7df16ba13c9f"),
                             BirthDate = new DateTime(1995, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ContactCategoryId = new Guid("43c9ffea-48a2-4fbb-8eb0-672b74e30486"),
+                            ContactCategoryId = new Guid("223f0f2d-0710-437b-99ee-1d58fed2dfbd"),
                             Email = "jan.kowalski@contactlistapp.com",
                             FirstName = "Jan",
                             LastName = "Kowalski",
@@ -76,9 +76,9 @@ namespace ContactList.Dal.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ff0fe9d5-3c6f-4b63-95be-8ac73a4b940f"),
+                            Id = new Guid("1cb0018f-f366-4a74-ace7-f16e7677cedd"),
                             BirthDate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ContactCategoryId = new Guid("43c9ffea-48a2-4fbb-8eb0-672b74e30486"),
+                            ContactCategoryId = new Guid("223f0f2d-0710-437b-99ee-1d58fed2dfbd"),
                             Email = "adam.nowak@contactlistapp.com",
                             FirstName = "Adam",
                             LastName = "Nowak",
@@ -99,22 +99,22 @@ namespace ContactList.Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categroies");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("43c9ffea-48a2-4fbb-8eb0-672b74e30486"),
+                            Id = new Guid("223f0f2d-0710-437b-99ee-1d58fed2dfbd"),
                             Name = "służbowy"
                         },
                         new
                         {
-                            Id = new Guid("d6b26ff3-a0fc-4558-818e-b3fd2987bcea"),
+                            Id = new Guid("ae9518e2-8ea0-4e19-b48e-74e24d82e2b3"),
                             Name = "prywatny"
                         },
                         new
                         {
-                            Id = new Guid("f280441e-589c-4918-90ba-4cad76122ac5"),
+                            Id = new Guid("d6957802-d1fb-4b26-a803-9800ec4493db"),
                             Name = "inny"
                         });
                 });
@@ -141,14 +141,14 @@ namespace ContactList.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("76ba6fd3-0b1a-4dc3-855e-81ab5905d140"),
-                            ContactCategoryId = new Guid("43c9ffea-48a2-4fbb-8eb0-672b74e30486"),
+                            Id = new Guid("8c1b9e51-f251-4c53-94a5-054603da3ff1"),
+                            ContactCategoryId = new Guid("223f0f2d-0710-437b-99ee-1d58fed2dfbd"),
                             Name = "szef"
                         },
                         new
                         {
-                            Id = new Guid("368fa9f7-ae7a-4322-8c3f-64fdf2563b83"),
-                            ContactCategoryId = new Guid("43c9ffea-48a2-4fbb-8eb0-672b74e30486"),
+                            Id = new Guid("52cde201-6173-4a63-8d21-bfe77e1b45fd"),
+                            ContactCategoryId = new Guid("223f0f2d-0710-437b-99ee-1d58fed2dfbd"),
                             Name = "klient"
                         });
                 });
@@ -174,7 +174,7 @@ namespace ContactList.Dal.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("e9bed892-40b1-412a-894a-9e3796a282aa"),
+                            UserId = new Guid("8d5e017e-3d11-4da2-84d9-7a2ee1abdb97"),
                             Email = "user1@contactlistapp.com",
                             Password = "!@#Password123"
                         });
