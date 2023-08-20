@@ -8,6 +8,7 @@ using ContactList.Service.DataServices;
 using ContactList.Service.Dtos;
 using ContactList.Service.Profiles;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -39,23 +40,28 @@ builder.Services.AddAutoMapper(
 
 // DbContext
 builder.Services.AddTransient<DbContext, ContactlistDbContext>();
+
+// Configure JwtBearer authentication options.
 var authenticationSettings = new AuthenticationSettings();
 builder.Configuration.GetSection("Authentication").Bind(authenticationSettings);
-
 builder.Services.AddSingleton(authenticationSettings);
 builder.Services.AddAuthentication(option =>
 {
-    option.DefaultAuthenticateScheme = "Bearer";
-    option.DefaultScheme = "Bearer";
-    option.DefaultChallengeScheme = "Bearer";
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(cfg =>
 {
     cfg.RequireHttpsMetadata = false;
     cfg.SaveToken = true;
     cfg.TokenValidationParameters = new TokenValidationParameters
     {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
         ValidIssuer = authenticationSettings.JwtIssuer,
-        ValidAudience = authenticationSettings.JwtIssuer,
+        ValidAudience = authenticationSettings.JwtAudience,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationSettings.JwtKey)),
     };
 });
@@ -88,9 +94,9 @@ app.UseCors("ContactlistOrigins");
 
 app.UseAuthentication();
 
-app.UseHttpsRedirection();
-
 app.UseAuthorization();
+
+app.UseHttpsRedirection();
 
 app.MapControllers();
 

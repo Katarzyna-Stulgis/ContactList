@@ -2,12 +2,15 @@
 using ContactList.Domain.Interfaces;
 using ContactList.Domain.Models.Entities;
 using ContactList.Service.Dtos;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactList.Api.Controllers
 {
     [Route("api/Contacts")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ContactController : ControllerBase
     {
         private readonly IContactService _contactService;
@@ -20,6 +23,7 @@ namespace ContactList.Api.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<Contact>>> GetAll()
         {
             var task = await _contactService.GetAllContactsAsync();
@@ -27,6 +31,7 @@ namespace ContactList.Api.Controllers
         }
 
         [HttpGet("{guid}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Contact>> Get([FromRoute] Guid guid)
         {
             var task = await _contactService.GetContactByIdAsync(guid);

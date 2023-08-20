@@ -52,7 +52,7 @@ namespace ContactList.Service.DataServices
             var token = new JwtSecurityToken(_authenticationSettings.JwtIssuer,
                 _authenticationSettings.JwtIssuer,
                 claims,
-                expires,
+                expires: expires,
                 signingCredentials: cred);
 
             var tokenHandler = new JwtSecurityTokenHandler();
