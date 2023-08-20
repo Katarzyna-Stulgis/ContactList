@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <button mat-button [routerLink]="['/']"> Lista kontaktów</button>
+  <button mat-button *ngIf="userIsLoggedIn" (click)="openDialog()">Dodaj kontakt</button>
+
+  <button mat-button *ngIf="!userIsLoggedIn" class="login-button" [routerLink]="['/auth']">Zaloguj sie lub
+    zarejestruj</button>
+
+  <button mat-button [routerLink]="['/']" class="login-button" (click)="LogOut()" *ngIf="userIsLoggedIn"> Wyloguj
+    się</button>
+
+</mat-toolbar>
+<router-outlet></router-outlet>

@@ -1,0 +1,12 @@
+<div class="container">
+    <mat-list>
+        <div *ngFor="let singleContact of contacts">
+            <a [routerLink]="['/contacts' , singleContact.id ]">
+                <mat-list-item>
+                    <app-contact [contact]="singleContact"> </app-contact>
+                </mat-list-item>
+            </a>
+            <mat-divider></mat-divider>
+        </div>
+    </mat-list>
+</div>

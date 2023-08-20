@@ -1,0 +1,30 @@
+﻿using AutoMapper;
+using ContactList.Domain.Interfaces;
+using ContactList.Domain.Models.Entities;
+using ContactList.Service.Dtos;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ContactList.Api.Controllers
+{
+    [Route("api/ContactCategories")]
+    [ApiController]
+    public class ContactCategoryController : ControllerBase
+    {
+        private readonly IContactCategoryService _contactCategoryService;
+        private readonly IMapper _mapper;
+
+        public ContactCategoryController(IContactCategoryService contactCategoryService, IMapper mapper)
+        {
+            _contactCategoryService = contactCategoryService;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<ContactCategory>>> GetAll()
+        {
+            var task = await _contactCategoryService.GetAllCategoriesAsync();
+            var dto = _mapper.Map<List<ContactCategoryListDto>>(task);
+            return Ok(dto);
+        }
+    }
+}

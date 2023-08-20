@@ -1,0 +1,20 @@
+.container {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: centers;
+    justify-content: center;
+}
+
+mat-form-field {
+    display: block;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.login-container {
+    width: 50%;
+    text-align: center;
+}

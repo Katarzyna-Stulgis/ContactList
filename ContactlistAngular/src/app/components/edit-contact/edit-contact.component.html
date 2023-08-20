@@ -1,0 +1,83 @@
+<div class="container">
+    <span class="title">Edycja kontaktu</span>
+    <form class="form">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Imię </mat-label>
+            <input matInput [formControl]="firstNameFormControl" [(ngModel)]="contact.firstName" placeholder="Imię"
+                name="Imię" required="To pole jest wymagane">
+                <mat-error>
+                    Imię powinno zawierac tylko litery
+                </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput [formControl]="lastNameFormControl" [(ngModel)]="contact.lastName" placeholder="Nazwisko"
+                name="Nazwisko" required="To pole jest wymagane">
+                <mat-error>
+                    Nazwisko powinno zawierac tylko litery
+                </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input type="email" matInput [formControl]="emailFormControl" [(ngModel)]="contact.email"
+                placeholder="E-mail" name="E-mail" required="To pole jest wymagane">
+            <mat-error *ngIf="emailFormControl.hasError('email') ">
+                Forma adresu e-mail jest niepoprawna
+            </mat-error>
+        </mat-form-field>
+
+        <div class="category-div">
+            <mat-label id="example-radio-group-label">Kategoria</mat-label>
+            <mat-radio-group aria-labelledby="example-radio-group-label" 
+                class="example-radio-group" [(ngModel)]="contactCategoryName" name="Kategoria" (change)="onSelectedOptionChange()"
+                required="To pole jest wymagane">
+                <mat-radio-button class="example-radio-button" *ngFor="let category of categories" [value]="category.name">
+                    {{category.name}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <mat-form-field class="full-width" appearance="fill"
+            *ngIf="contactCategoryName=='inny'">
+            <mat-label>Podkategoria</mat-label>
+            <input matInput [(ngModel)]="contact.subcategory" placeholder="Podkategoria" name="Podkategoria">
+        </mat-form-field>
+
+        <mat-form-field *ngIf="contactCategoryName =='służbowy'">
+            <mat-label>Wybierz podkategorię</mat-label>
+            <mat-select [(value)]="contact.subcategory">
+                <mat-option *ngFor="let subcategory of businessSubcategories" value={{subcategory.name}}>
+                    {{subcategory.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Telefon</mat-label>
+            <span matPrefix>+48 &nbsp;</span>
+            <input type="tel" matInput [formControl]="phoneFormControl" [(ngModel)]="contact.phoneNumber"
+                placeholder="Telefon" name="Telefon" required="To pole jest wymagane">
+            <mat-error *ngIf="phoneFormControl.hasError('pattern') ">
+                Numer teleonu powienien zawierać 9 cyfr
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Data urodzenia MM/DD/YYYY</mat-label>
+            <input matInput [formControl]="birthDateFormControl" [matDatepicker]="picker"
+                [(ngModel)]="contact.birthDate" placeholder="Data urodzenia" name="Data urodzenia"
+                required="To pole jest wymagane">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>
+                Niepoprawna forma daty
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+    <div>
+        <div>
+            <button mat-raised-button (click)="Save()" color="primary">Ok</button>
+        </div>
+    </div>
+</div>

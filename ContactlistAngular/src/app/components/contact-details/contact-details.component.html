@@ -1,0 +1,16 @@
+<div class="container">
+    <p><b>Imię: </b>{{contact.firstName}}</p>
+    <p><b>Nazwisko: </b>{{contact.lastName}}</p>
+    <p><b>Email: </b>{{contact.email}}</p>
+    <p><b>nr. telefonu: </b>{{contact.phoneNumber}}</p>
+    <p><b>data urodzenia: </b>{{contact.birthDate | date:'dd.MM.yyyy'}}</p>
+    <p><b>Kategoria: </b>{{contactCategory}}</p>
+    <p *ngIf="contact.subcategory" ><b>Podkategoria: </b>{{contact.subcategory}}</p>
+
+    <div>
+        <button mat-raised-button color="primary" [routerLink]="['/contacts', contactId,'edit-contact']" *ngIf="userIsLoggedIn">
+            Edytuj</button>
+        <button mat-raised-button color="primary" [routerLink]="['/']" *ngIf="userIsLoggedIn" (click)="Delete()">
+            Usuń</button>
+    </div>
+</div>

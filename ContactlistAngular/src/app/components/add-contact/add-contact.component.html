@@ -1,0 +1,82 @@
+<div>
+    <span class="title">Dodawanie kontaktu</span>
+    <form class="form">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Imię </mat-label>
+            <input matInput [formControl]="firstNameFormControl" [(ngModel)]="data.firstName" placeholder="Imię" name="Imię"
+                required="To pole jest wymagane">
+                <mat-error>
+                    Imię powinno zawierac tylko litery
+                </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Nazwisko</mat-label>
+            <input matInput [formControl]="lastNameFormControl" [(ngModel)]="data.lastName" placeholder="Nazwisko" name="Nazwisko"
+                required="To pole jest wymagane">
+                <mat-error>
+                    Nazwisko powinno zawierac tylko litery
+                </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input type="email" matInput [formControl]="emailFormControl" [(ngModel)]="data.email" placeholder="E-mail"
+                name="E-mail" required="To pole jest wymagane">
+            <mat-error *ngIf="emailFormControl.hasError('email') ">
+                Forma adresu e-mail jest niepoprawna
+            </mat-error>
+        </mat-form-field>
+
+        <div class="category-div">
+            <mat-label id="example-radio-group-label">Kategoria</mat-label>
+            <mat-radio-group [formControl]="categoryFormControl" aria-labelledby="example-radio-group-label" class="example-radio-group"
+                [(ngModel)]="pickedCategory" name="Kategoria" required="To pole jest wymagane">
+                <mat-radio-button class="example-radio-button" *ngFor="let category of categories" [value]="category">
+                    {{category.name}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <mat-form-field class="full-width" appearance="fill" *ngIf="pickedCategory && pickedCategory.name=='inny'">
+            <mat-label>Podkategoria</mat-label>
+            <input matInput  [(ngModel)]="data.subcategory" placeholder="Podkategoria" name="Podkategoria"
+                >
+        </mat-form-field>
+
+        <mat-form-field *ngIf="pickedCategory && pickedCategory.name=='służbowy'">
+            <mat-label>Wybierz podkategorię</mat-label>
+            <mat-select [(value)]="data.subcategory">
+                <mat-option *ngFor="let subcategory of businessSubcategories" value={{subcategory.name}}>
+                    {{subcategory.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Telefon</mat-label>
+            <span matPrefix>+48 &nbsp;</span>
+            <input type="tel" matInput [formControl]="phoneFormControl" [(ngModel)]="data.phoneNumber"
+                placeholder="Telefon" name="Telefon" required="To pole jest wymagane">
+            <mat-error *ngIf="phoneFormControl.hasError('pattern') ">
+                Numer teleonu powienien zawierać 9 cyfr
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Data urodzenia MM/DD/YYYY</mat-label>
+            <input matInput [formControl]="birthDateFormControl" [matDatepicker]="picker" [(ngModel)]="data.birthDate" placeholder="Data urodzenia"
+                name="Data urodzenia" required="To pole jest wymagane">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>
+                Niepoprawna forma daty
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+    <div>
+        <div mat-dialog-actions>
+            <button mat-stroked-button color="primary" (click)="CloseDialog()">Anuluj</button>
+            <button mat-raised-button (click)="AddContact()" color="primary">Ok</button>
+        </div>
+    </div>
+</div>

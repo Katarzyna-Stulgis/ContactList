@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="login-container">
+        <div>
+            <div class="tabs">
+                <mat-tab-group mat-align-tabs="center" [(selectedIndex)]="selectedIndex">
+                    <mat-tab label="Zaloguj się">
+                        <form class="form">
+                            <mat-form-field class="full-width" appearance="fill">
+                                <mat-label>E-mail</mat-label>
+                                <input matInput placeholder="E-mail" name="E-mail" [formControl]="emailFormControl"
+                                    [(ngModel)]="loginUser.email">
+                                <mat-error *ngIf="emailFormControl.hasError('email') ">
+                                    Forma adresu e-mail jest niepoprawna
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="full-width" appearance="fill">
+                                <mat-label>Hasło</mat-label>
+                                <input matInput placeholder="Hasło" name="Hasło" type="password"
+                                    [(ngModel)]="loginUser.password">
+                            </mat-form-field>
+                        </form>
+                        <button mat-raised-button color="primary" (click)="login(loginUser)">Zaloguj się</button>
+                    </mat-tab>
+                    <mat-tab label="Zarejestruj się">
+                        <form class="form">
+                            <mat-form-field class="full-width" appearance="fill">
+                                <mat-label>E-mail</mat-label>
+                                <input matInput placeholder="E-mail" name="E-mail" [(ngModel)]="registerUser.email"
+                                    [formControl]="emailFormControl" required="To pole jest wymagane">
+                                <mat-error *ngIf="emailFormControl.hasError('email') ">
+                                    Forma adresu e-mail jest niepoprawna
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="full-width" appearance="fill">
+                                <mat-label>Hasło</mat-label>
+                                <input matInput placeholder="Hasło" name="Hasło" type="password"
+                                    [formControl]="password" [(ngModel)]="registerUser.password"
+                                    required="To pole jest wymagane">
+                                <mat-error>
+                                    Forma hasła jest niepoprawna. Hasło powinno składać sie z minimum 8 znaków i zawierć
+                                    małe, wielkie litery, cyfry oraz znaki
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="full-width" appearance="fill">
+                                <mat-label>Powtórz Hasło</mat-label>
+                                <input matInput placeholder="Powtórz Hasło" name="Powtórz Hasło" type="password" [formControl]="confirmPasswordControl"
+                                    [(ngModel)]="registerUser.confirmPassword"
+                                    confirmPasswordrequired="To pole jest wymagane">
+                                <mat-error>
+                                    To pole jest wymagane
+                                </mat-error>
+                            </mat-form-field>
+                        </form>
+                        <button mat-raised-button color="primary" (click)="register(registerUser)">
+                            Zarejestruj się</button>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+    </div>
+</div>
